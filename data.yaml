@@ -1,5 +1,5 @@
-train: /kaggle/working/yolo_dataset/images/train
-val: /kaggle/working/yolo_dataset/images/val
+train: ./yolo_dataset/images/train
+val: ./yolo_dataset/images/val
 nc: 4 # Số lớp: name, brand, date, weight
 names: ['name', 'brand', 'date', 'weight']
 
