@@ -1,18 +1,28 @@
 from ultralytics import YOLO
 import os
 
-# Đường dẫn đến tệp data.yaml
-data_yaml_path = './data.yaml'
+# Đảm bảo thư mục tồn tại
+required_dirs = [
+    './yolo_dataset/images/train',
+    './yolo_dataset/images/val',
+    './yolo_dataset/labels/train',
+    './yolo_dataset/labels/val'
+]
 
-# Tải mô hình pre-trained YOLOv8 (phiên bản nano để tiết kiệm tài nguyên trên GPU P100)
+for dir_path in required_dirs:
+    os.makedirs(dir_path, exist_ok=True)
+
+# Tải mô hình pre-trained
 model = YOLO('yolov8n.pt')
 
 # Huấn luyện mô hình
-# - epochs: Số vòng huấn luyện (dùng 50 để đảm bảo hội tụ tốt)
-# - imgsz: Kích thước ảnh (dùng 640 để tiết kiệm tài nguyên)
-# - device: 0 (GPU P100)
-model.train(data=data_yaml_path, epochs=50, imgsz=640, device=0)
+model.train(
+    data='data.yaml',
+    epochs=50,
+    imgsz=640,
+    device=0,
+    project='runs/train',
+    name='exp'
+)
 
-# Lưu mô hình đã huấn luyện
-model.save('./yolov8_trained.pt')
-print("Huấn luyện YOLOv8 hoàn tất! Mô hình được lưu tại /kaggle/working/yolov8_trained.pt")
+print("Huấn luyện hoàn tất! Mô hình được lưu trong thư mục runs/train/exp")
