@@ -1,0 +1,12 @@
+train: /kaggle/working/yolo_dataset/images/train
+val: /kaggle/working/yolo_dataset/images/val
+nc: 4 # Số lớp: name, brand, date, weight
+names: ['name', 'brand', 'date', 'weight']
+
+# Tăng cường dữ liệu để cải thiện hiệu suất trên dữ liệu nhỏ
+augment: True
+flipud: 0.5 # Lật ảnh theo chiều dọc
+fliplr: 0.5 # Lật ảnh theo chiều ngang
+mosaic: 1.0 # Sử dụng mosaic augmentation
+brightness: 0.2 # Thay đổi độ sáng
+contrast: 0.2 # Thay đổi độ tương phản
