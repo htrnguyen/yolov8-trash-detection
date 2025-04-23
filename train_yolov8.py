@@ -1,10 +1,11 @@
 from ultralytics import YOLO
 import os
+import shutil
 
-# Get absolute path to project root
-ROOT = os.path.dirname(os.path.abspath(__file__))
+# Get absolute path for Kaggle environment
+ROOT = '/kaggle/working/yolov8-trash-detection'
 
-# Define directories with absolute paths
+# Define directories
 required_dirs = [
     os.path.join(ROOT, 'yolo_dataset/images/train'),
     os.path.join(ROOT, 'yolo_dataset/images/val'),
@@ -19,7 +20,7 @@ for dir_path in required_dirs:
 # Load pre-trained model
 model = YOLO('yolov8n.pt')
 
-# Train model with absolute paths
+# Train model
 model.train(
     data=os.path.join(ROOT, 'data.yaml'),
     epochs=50,

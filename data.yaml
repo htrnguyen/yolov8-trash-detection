@@ -1,6 +1,6 @@
-path: .
-train: yolo_dataset/images/train
-val: yolo_dataset/images/val
+path: /kaggle/working/yolov8-trash-detection  # root directory
+train: yolo_dataset/images/train  # train images
+val: yolo_dataset/images/val      # val images
 nc: 4 # Số lớp: name, brand, date, weight
 names: ['name', 'brand', 'date', 'weight']
 
