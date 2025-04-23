@@ -1,28 +1,32 @@
 from ultralytics import YOLO
 import os
 
-# Đảm bảo thư mục tồn tại
+# Get absolute path to project root
+ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# Define directories with absolute paths
 required_dirs = [
-    './yolo_dataset/images/train',
-    './yolo_dataset/images/val',
-    './yolo_dataset/labels/train',
-    './yolo_dataset/labels/val'
+    os.path.join(ROOT, 'yolo_dataset/images/train'),
+    os.path.join(ROOT, 'yolo_dataset/images/val'),
+    os.path.join(ROOT, 'yolo_dataset/labels/train'),
+    os.path.join(ROOT, 'yolo_dataset/labels/val')
 ]
 
+# Create directories
 for dir_path in required_dirs:
     os.makedirs(dir_path, exist_ok=True)
 
-# Tải mô hình pre-trained
+# Load pre-trained model
 model = YOLO('yolov8n.pt')
 
-# Huấn luyện mô hình
+# Train model with absolute paths
 model.train(
-    data='data.yaml',
+    data=os.path.join(ROOT, 'data.yaml'),
     epochs=50,
     imgsz=640,
     device=0,
-    project='runs/train',
+    project=os.path.join(ROOT, 'runs/train'),
     name='exp'
 )
 
-print("Huấn luyện hoàn tất! Mô hình được lưu trong thư mục runs/train/exp")
+print("Training completed! Model saved in runs/train/exp")
